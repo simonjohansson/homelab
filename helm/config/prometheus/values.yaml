@@ -1,0 +1,18 @@
+prometheus-node-exporter:
+  hostRootFsMount:
+    enabled: false # Needed to make it run in docker desktop k8s
+
+grafana:
+  adminPassword: admin
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+    - grafana.local.simonjohansson.com
+
+prometheus:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+    - prometheus.local.simonjohansson.com

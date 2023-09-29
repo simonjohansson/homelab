@@ -1,0 +1,16 @@
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hosts:
+  - pihole.local.simonjohansson.com
+
+serviceDhcp:
+  enabled: false
+
+monitoring:
+  podMonitor:
+    enabled: true
+    labels:
+      release: prometheus
+  sidecar:
+    enabled: true
