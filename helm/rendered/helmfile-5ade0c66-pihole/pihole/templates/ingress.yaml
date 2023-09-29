@@ -1,0 +1,24 @@
+---
+# Source: pihole/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pihole
+  labels:
+    app: pihole
+    chart: pihole-2.18.0
+    release: pihole
+    heritage: Helm
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "pihole.local.simonjohansson.com"
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: pihole-web
+                port: 
+                  name: http
