@@ -26,15 +26,3 @@ spec:
       selector:
         dnsZones:
         - "simonjohansson.com"
-{{/*---*/}}
-{{/*apiVersion: cert-manager.io/v1*/}}
-{{/*kind: Certificate*/}}
-{{/*metadata:*/}}
-{{/*  name: sup*/}}
-{{/*spec:*/}}
-{{/*  dnsNames:*/}}
-{{/*  - "sup.simonjohansson.com"*/}}
-{{/*  secretName: sup*/}}
-{{/*  issuerRef:*/}}
-{{/*    name: letsencrypt*/}}
-{{/*    kind: ClusterIssuer*/}}
