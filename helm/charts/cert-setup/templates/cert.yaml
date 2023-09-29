@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloudflare
+type: Opaque
+stringData:
+  token: {{.Values.cloudflare.token }}
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: simon@simonjohansson.com
+    privateKeySecretRef:
+      name: letsencrypt
+    solvers:
+    - dns01:
+        cloudflare:
+          email: simon@simonjohansson.com
+          apiTokenSecretRef:
+            name: cloudflare
+            key: token
+      selector:
+        dnsZones:
+        - "simonjohansson.com"
+{{/*---*/}}
+{{/*apiVersion: cert-manager.io/v1*/}}
+{{/*kind: Certificate*/}}
+{{/*metadata:*/}}
+{{/*  name: sup*/}}
+{{/*spec:*/}}
+{{/*  dnsNames:*/}}
+{{/*  - "sup.simonjohansson.com"*/}}
+{{/*  secretName: sup*/}}
+{{/*  issuerRef:*/}}
+{{/*    name: letsencrypt*/}}
+{{/*    kind: ClusterIssuer*/}}

@@ -9,10 +9,22 @@ grafana:
     ingressClassName: nginx
     hosts:
     - grafana.local.simonjohansson.com
-
+    tls:
+    - secretName: grafana-tls
+      hosts:
+      - grafana.local.simonjohansson.com
+    annotations:
+      "cert-manager.io/cluster-issuer": letsencrypt
 prometheus:
   ingress:
     enabled: true
     ingressClassName: nginx
     hosts:
     - prometheus.local.simonjohansson.com
+    tls:
+    - secretName: prometheus-tls
+      hosts:
+      - prometheus.local.simonjohansson.com
+    annotations:
+      "cert-manager.io/cluster-issuer": letsencrypt
+

@@ -9,6 +9,8 @@ repositories:
   url: https://prometheus-community.github.io/helm-charts
 - name: mojo2600
   url: https://mojo2600.github.io/pihole-kubernetes
+- name: jetstack
+  url: https://charts.jetstack.io
 
 templates:
   default: &default
@@ -32,6 +34,7 @@ releases:
   version: 4.8.0
   needs:
   - prometheus/prometheus
+  - cert-manager/cert-setup
 
 - <<: *default
   name: pihole
@@ -40,3 +43,20 @@ releases:
   version: 2.18.0
   needs:
   - prometheus/prometheus
+
+- <<: *default
+  name: cert-manager
+  namespace: cert-manager
+  chart: jetstack/cert-manager
+  version: 1.13.1
+  needs:
+  - prometheus/prometheus
+
+- name: cert-setup
+  namespace: cert-manager
+  chart: charts/cert-setup
+  needs:
+  - cert-manager
+  values:
+  - cloudflare:
+      token: {{ requiredEnv "CLOUDFLARE_TOKEN" }}

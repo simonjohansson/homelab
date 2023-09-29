@@ -3,6 +3,12 @@ ingress:
   ingressClassName: nginx
   hosts:
   - pihole.local.simonjohansson.com
+  tls:
+  - secretName: pihole-tls
+    hosts:
+    - pihole.local.simonjohansson.com
+  annotations:
+    "cert-manager.io/cluster-issuer": letsencrypt
 
 serviceDhcp:
   enabled: false
